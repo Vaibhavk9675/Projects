@@ -61,12 +61,12 @@ user_input = input('If you want to start quiz, type "start", otherwise type "no"
 score = 0
 
 if user_input.lower() == 'start':
-    for q in questions:
-        print(q['que'])  # show question
-        for opt in q['opt']:  # show all options
+    for i in questions:
+        print(i['que'])  # show question
+        for opt in i['opt']:  # show all options
             print(opt)
         user_ans = input('Your answer: ')
-        if user_ans.lower() == q['ans']:
+        if user_ans.lower() == i['ans']:
             print('Correct!\n')
             score += 1
         else:

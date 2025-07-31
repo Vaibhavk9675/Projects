@@ -1,6 +1,3 @@
-print('Quiz_App')
-print()
-
 questions = [
     {
         "que": "What is the capital of France?",

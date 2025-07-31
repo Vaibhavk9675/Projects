@@ -54,41 +54,40 @@ questions = [
     }
 ]
 
-print('Note: Be careful with your answer. You cannot change it after moving to the next question.')
 
-user_input = input('If you want to start quiz, type "start", otherwise type "no":\n')
+def ask_question(questions):
+    print(questions['que'])
+    for option in questions['opt']:
+        print(option)
+    answere = input("Your answer: ")
+    return answere == questions['ans']
 
-score = 0
-
-if user_input.lower() == 'start':
-    for i in questions:
-        print(i['que'])  # show question
-        for opt in i['opt']:  # show all options
-            print(opt)
-        user_ans = input('Your answer: ')
-        if user_ans.lower() == i['ans']:
+def run_quiz(questions):
+    score = 0
+    for question in questions:
+        if ask_question(question): #== True:
             print('Correct!\n')
             score += 1
         else:
             print('Wrong!\n')
-        
-        # Ask to continue to next question
-        # input_next = input('Type "next" to move to the next question: ')
-        # while input_next.lower() != 'next':
-        #     input_next = input('Please type "next" to continue: ')
+    return score 
 
-elif user_input.lower() == 'no':
-    print('Thanks, Have a nice day!')
-    exit()
+def submit_quiz(score, total):
+    confirm = input('Do you want to submit your answers? If yes, type "submit": ')
+    if confirm.lower() == 'submit':
+        print(f'Your final score is {score} out of {total}')
 
-else:
-    print('Enter a valid input!')
-    exit()
+def main():
+    print("Quiz App\n")
+    print('Note: You can’t change your answer after submission.')
 
-# After quiz ends
-submission = input('Do you want to submit your answers? If yes, type "submit": ')
-if submission.lower() == 'submit':
-    print(f'Your score is {score} out of {len(questions)}')
-    if score == 10:
-        print("Wow !, You have scored full marks")
+    user_input = input("Type 'start' to begin or 'no' to exit: ")
+    if user_input.lower() == 'start':
+        score = run_quiz(questions)
+        submit_quiz(score, len(questions))
+    elif user_input.lower() == 'no':
+        print("Thanks! Have a nice day.")
+    else:
+        print("Invalid input.")
 
+main()
